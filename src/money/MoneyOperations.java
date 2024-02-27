@@ -12,7 +12,7 @@ import java.util.List;
 private static final Currency EUR = Currency.getInstance("EUR");
 private static final Currency PLN = Currency.getInstance("PLN");
 
-public static void main() {
+public void main() {
 
     var money = List.of(
             new Money(BigDecimal.valueOf(12), PLN),
@@ -40,8 +40,6 @@ public static void main() {
             .filter(m -> m.currency().equals(PLN))
             .gather(MyGatherers.maxBy(Money::amount))
             .forEach(System.out::println);
-
-
 
     var moneyWithNulls = Arrays.asList(
             new Money(BigDecimal.valueOf(12), PLN),
