@@ -16,7 +16,7 @@ public void main() {
 
     var money = List.of(
             new Money(BigDecimal.valueOf(12), PLN),
-            new Money(BigDecimal.valueOf(11), PLN),
+            new Money(BigDecimal.valueOf(11), EUR),
             new Money(BigDecimal.valueOf(15), PLN)
     );
 
