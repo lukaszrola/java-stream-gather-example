@@ -1,4 +1,4 @@
-package utils;
+package money.gatherers;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -6,11 +6,11 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Gatherer;
 
-public class DistinctByGatherer<T, P> implements Gatherer<T, Set<P>, T> {
+class DistinctByGatherer<T, P> implements Gatherer<T, Set<P>, T> {
 
     private final Function<T, P> extractor;
 
-    public DistinctByGatherer(Function<T, P> extractor) {
+    DistinctByGatherer(Function<T, P> extractor) {
         this.extractor = extractor;
     }
 

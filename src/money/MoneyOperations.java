@@ -1,5 +1,8 @@
+
+
 import money.Money;
-import utils.MyGatherers;
+import money.gatherers.MyGatherers;
+
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -17,26 +20,28 @@ public static void main() {
             new Money(BigDecimal.valueOf(15), PLN)
     );
 
-    System.out.println("Find first Gatherer");
+    System.out.println("Distinct By Currency:");
+    money.stream()
+            .gather(MyGatherers.distinctBy(Money::currency))
+            .forEach(System.out::println);
+
+    System.out.println("\nReduce By Currency");
+    money.stream()
+            .gather(MyGatherers.reduceBy(Money::currency, Money::add))
+            .forEach(System.out::println);
+
+    System.out.println("\nFind first Gatherer");
     money.stream()
             .gather(MyGatherers.findFirst(m -> m.currency().equals(PLN)))
             .forEach(System.out::println);
 
-    System.out.println("Max By Amount");
+    System.out.println("\nMax By Amount");
     money.stream()
             .filter(m -> m.currency().equals(PLN))
             .gather(MyGatherers.maxBy(Money::amount))
             .forEach(System.out::println);
 
-    System.out.println("Reduce By Currency");
-    money.stream()
-            .gather(MyGatherers.reduceBy(Money::currency, Money::add))
-            .forEach(System.out::println);
 
-    System.out.println("\nDistinct By Currency:");
-    money.stream()
-            .gather(MyGatherers.distinctBy(Money::currency))
-            .forEach(System.out::println);
 
     var moneyWithNulls = Arrays.asList(
             new Money(BigDecimal.valueOf(12), PLN),

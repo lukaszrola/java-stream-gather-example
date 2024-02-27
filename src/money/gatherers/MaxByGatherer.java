@@ -1,16 +1,15 @@
-package utils;
+package money.gatherers;
 
-import java.util.Comparator;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Gatherer;
 
-public class MaxByGatherer<T, B extends Comparable<B>> implements Gatherer<T, State<T>, T> {
+class MaxByGatherer<T, B extends Comparable<B>> implements Gatherer<T, State<T>, T> {
     private final Function<T, B> extractor;
 
-    public MaxByGatherer(Function<T, B> extractor) {
+    MaxByGatherer(Function<T, B> extractor) {
         this.extractor = extractor;
     }
 

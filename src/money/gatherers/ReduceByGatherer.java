@@ -1,4 +1,4 @@
-package utils;
+package money.gatherers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,11 +8,11 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Gatherer;
 
-public class ReduceByGatherer<T, P> implements Gatherer<T, Map<P, T>, T> {
+class ReduceByGatherer<T, P> implements Gatherer<T, Map<P, T>, T> {
     private final Function<T, P> selector;
     private final BiFunction<T, T, T> operation;
 
-    public ReduceByGatherer(Function<T, P> extractor, BiFunction<T, T, T> reducer) {
+    ReduceByGatherer(Function<T, P> extractor, BiFunction<T, T, T> reducer) {
         this.selector = extractor;
         this.operation = reducer;
     }

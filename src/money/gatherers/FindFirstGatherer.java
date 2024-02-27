@@ -1,9 +1,9 @@
-package utils;
+package money.gatherers;
 
 import java.util.function.Predicate;
 import java.util.stream.Gatherer;
 
-public class FindFirstGatherer<T> implements Gatherer<T, T, T> {
+class FindFirstGatherer<T> implements Gatherer<T, T, T> {
     private final Predicate<T> predicate;
 
     public FindFirstGatherer(Predicate<T> predicate) {

@@ -1,9 +1,9 @@
-package utils;
+package money.gatherers;
 
 import java.util.function.Function;
 import java.util.stream.Gatherer;
 
-public class MapNotNullGatherer<T,M> implements Gatherer<T, T, M> {
+class MapNotNullGatherer<T,M> implements Gatherer<T, T, M> {
     private final Function<T, M> mapper;
 
     public MapNotNullGatherer(Function<T, M> mapper) {
