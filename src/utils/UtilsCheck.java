@@ -1,0 +1,53 @@
+import money.Money;
+import utils.MyGatherers;
+
+import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Currency;
+import java.util.List;
+
+private static final Currency EUR = Currency.getInstance("EUR");
+private static final Currency PLN = Currency.getInstance("PLN");
+
+public static void main() {
+
+    var money = List.of(
+            new Money(BigDecimal.valueOf(12), PLN),
+            new Money(BigDecimal.valueOf(11), PLN),
+            new Money(BigDecimal.valueOf(15), PLN)
+    );
+
+    System.out.println("Find first Gatherer");
+    money.stream()
+            .gather(MyGatherers.findFirst(m -> m.currency().equals(PLN)))
+            .forEach(System.out::println);
+
+    System.out.println("Max By Amount");
+    money.stream()
+            .filter(m -> m.currency().equals(PLN))
+            .gather(MyGatherers.maxBy(Money::amount))
+            .forEach(System.out::println);
+
+    System.out.println("Reduce By Currency");
+    money.stream()
+            .gather(MyGatherers.reduceBy(Money::currency, Money::add))
+            .forEach(System.out::println);
+
+    System.out.println("\nDistinct By Currency:");
+    money.stream()
+            .gather(MyGatherers.distinctBy(Money::currency))
+            .forEach(System.out::println);
+
+    var moneyWithNulls = Arrays.asList(
+            new Money(BigDecimal.valueOf(12), PLN),
+            null,
+            new Money(BigDecimal.valueOf(11), EUR),
+            new Money(BigDecimal.valueOf(15), PLN),
+            null
+    );
+
+    System.out.println("\nMap not-null Gatherer");
+    moneyWithNulls.stream()
+            .gather(MyGatherers.mapNotNull(m -> m.multiply(BigDecimal.TWO)))
+            .forEach(System.out::println);
+}
