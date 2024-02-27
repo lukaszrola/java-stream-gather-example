@@ -1,25 +1,30 @@
-import farm.Animal;
+import farm.AnimalStreamUtils;
+import farm.StringStreamUtils;
 
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Gatherers;
 
 import static farm.Animal.*;
 
-public static void main() {
+public void main() {
     var validSequence = List.of(SHEEP, SHEPARD, WOLF, WOLF);
     var invalidSequence = List.of(SHEPARD, SHEEP, WOLF, WOLF);
 
-    Predicate<List<Animal>> validTriplePredicate = triple -> !(triple.contains(SHEEP) && triple.contains(WOLF) && !triple.contains(SHEPARD));
+    System.out.println("Valid animal sequence:");
+    validSequence.stream()
+            .gather(AnimalStreamUtils.isValidSequence())
+            .forEach(System.out::println);
 
-    var tripleWindowGatherer = Gatherers.<Animal>windowSliding(3);
-    var isValidTripleGatherer = Gatherers.<List<Animal>, Boolean>fold(() -> true, (result, triple) -> result && validTriplePredicate.test(triple));
-    var isValidSequenceGatherer = tripleWindowGatherer.andThen(isValidTripleGatherer);
+    System.out.println("\nInvalid animal sequence:");
+    invalidSequence.stream()
+            .gather(AnimalStreamUtils.isValidSequence())
+            .forEach(System.out::println);
 
-    var resultForValidSequence = validSequence.stream().gather(isValidSequenceGatherer);
-    var resultForInvalidSequence = invalidSequence.stream().gather(isValidSequenceGatherer);
+    var listOfNames = List.of("John", "Marry", "George", "Ann", "Pete", "Stuart", "Adam");
 
-    resultForValidSequence.forEach(System.out::println); // true
-    resultForInvalidSequence.forEach(System.out::println); // false
+    System.out.println("\nCombine into pairs:");
+    listOfNames.stream()
+            .gather(StringStreamUtils.combineIntoPairs())
+            .forEach(System.out::println);
 }
 
