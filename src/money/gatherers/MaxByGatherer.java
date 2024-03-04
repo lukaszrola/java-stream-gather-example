@@ -1,5 +1,6 @@
 package money.gatherers;
 
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
@@ -41,6 +42,14 @@ class MaxByGatherer<T, B extends Comparable<B>> implements Gatherer<T, State<T>,
     public BinaryOperator<State<T>> combiner() {
 
         return (first, second) -> {
+            if (first.maxElement == null && second.maxElement == null) {
+                return null;
+            } else if (first.maxElement == null) {
+                return second;
+            } else if (second.maxElement == null) {
+                return first;
+            }
+
             B firstMaxValue = extractor.apply(first.maxElement);
             B secondMaxValue = extractor.apply(second.maxElement);
 
