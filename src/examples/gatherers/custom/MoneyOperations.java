@@ -1,7 +1,7 @@
 
 
-import money.Money;
-import money.gatherers.MyGatherers;
+import examples.gatherers.custom.Money;
+import examples.gatherers.custom.gatherers.MyGatherers;
 
 
 import java.math.BigDecimal;
@@ -37,7 +37,7 @@ public void main() {
 
     System.out.println("\nMax By Amount");
     money.stream()
-            .filter(m -> m.currency().equals(PLN))
+            .parallel()
             .gather(MyGatherers.maxBy(Money::amount))
             .forEach(System.out::println);
 

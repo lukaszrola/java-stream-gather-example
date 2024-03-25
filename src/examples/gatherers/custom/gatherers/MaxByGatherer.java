@@ -1,6 +1,5 @@
-package money.gatherers;
+package examples.gatherers.custom.gatherers;
 
-import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;

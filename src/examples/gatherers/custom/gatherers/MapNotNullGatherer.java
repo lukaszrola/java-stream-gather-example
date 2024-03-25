@@ -1,4 +1,4 @@
-package money.gatherers;
+package examples.gatherers.custom.gatherers;
 
 import java.util.function.Function;
 import java.util.stream.Gatherer;

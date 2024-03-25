@@ -1,4 +1,4 @@
-package money;
+package examples.gatherers.custom;
 
 import java.math.BigDecimal;
 import java.util.Currency;
